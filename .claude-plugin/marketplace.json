@@ -1,0 +1,39 @@
+{
+    "name": "marlinl-claude-skills",
+    "owner": {
+        "name": "MarlinL",
+        "url": "https://github.com/marlinl"
+    },
+    "description": "A collection of skills for Claude, created by MarlinL.",
+    "homepage": "https://github.com/marlinl/claude-skills",
+    "repository": "https://github.com/marlinl/claude-skills",
+    "metadata": {
+        "version": "1.0.0",
+        "license": "BSD-2-Clause"
+    },
+    "plugins": [
+        {
+        "name": "java-engineering-skills",
+        "source": "./java-engineering-skills",
+        "description": "A skill that provides weather information for a given location.",
+        "version": "1.0.0",
+        "author": {
+            "name": "MarlinL"
+        },
+        "keywords": [
+            "agent-design",
+            "rag",
+            "database",
+            "migration",
+            "observability",
+            "dependency-audit",
+            "release",
+            "api-review",
+            "ci-cd",
+            "mcp",
+            "security-audit"
+        ],
+        "category": "development"
+        }
+    ]
+}
