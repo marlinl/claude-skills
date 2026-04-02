@@ -1,1 +1,3 @@
-# claude-skills
+# Claude Code Skills & Plugin
+
+
