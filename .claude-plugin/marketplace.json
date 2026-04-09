@@ -13,25 +13,18 @@
     },
     "plugins": [
         {
-        "name": "java-engineering-skills",
-        "source": "./java-engineering-skills",
+        "name": "web-engineering-skills",
+        "source": "./web-engineering-skills",
         "description": "A skill that provides weather information for a given location.",
         "version": "1.0.0",
         "author": {
             "name": "MarlinL"
         },
         "keywords": [
-            "agent-design",
-            "rag",
-            "database",
-            "migration",
-            "observability",
-            "dependency-audit",
-            "release",
-            "api-review",
-            "ci-cd",
-            "mcp",
-            "security-audit"
+            "java",
+            "spring",
+            "maven",
+            "test-quality"
         ],
         "category": "development"
         }

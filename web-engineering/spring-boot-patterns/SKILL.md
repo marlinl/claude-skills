@@ -32,10 +32,11 @@ src/main/java/com/example/myapp/
 │   └── UserRepository.java
 ├── model/                         # Entities
 │   └── User.java
-├── dto/                           # Data transfer objects
-├── request/                       # REST request DTOs
+├── dto/    
+│   └── UserDTO.java               # Data transfer objects
+├── request/                       # REST request objects
 │   └── CreateUserRequest.java
-└── response/                      # REST response DTOs
+└── response/                      # REST response objects
 │   └── UserResponse.java
 ├── exception/                     # Custom exceptions
 │   ├── ResourceNotFoundException.java
@@ -52,10 +53,13 @@ src/main/java/com/example/myapp/
 ```java
 @RestController
 @RequestMapping("/user")
-@RequiredArgsConstructor  // Lombok for constructor injection
 public class UserController {
 
     private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAll() {
@@ -136,13 +140,17 @@ public interface UserService {
 
 // Implementation
 @Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)  // Default read-only
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final JwtProperties jwtProperties;
+
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, JwtProperties jwtProperties) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+        this.jwtProperties = jwtProperties;
+    }
 
     @Override
     public List<UserResponse> findAll() {
@@ -180,8 +188,7 @@ public class UserServiceImpl implements UserService {
 ### Service Best Practices
 
 - Interface + Impl for testability
-- `@Transactional(readOnly = true)` at class level
-- `@Transactional` for write methods
+- Managed complex, multi-table database operations using `@Transactional` annotations to ensure strict data integrity and consistency.
 - Throw domain exceptions, not generic ones
 - Use mappers (MapStruct) for entity ↔ DTO conversion
 
@@ -227,7 +234,27 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 ## DTO Patterns
 
-### Request/Response DTOs
+### DTO Design
+```java
+public record LoginUserDTO(
+    String name,
+
+    String email,
+
+    Integer age
+) {}
+```
+
+### DTO Best Practices
+
+- Always use Java record for DTOs to enforce immutability and eliminate boilerplate.
+- Strictly define separate DTOs for incoming requests and outgoing responses.
+- Design DTOs purely as anemic data carriers containing absolutely zero business logic.
+- Maintain flat DTO structures and actively avoid deeply nested object graphs.
+
+
+
+## Request/Response Objects
 ```java
 // Request DTO with validation
 public record CreateUserRequest(
@@ -385,7 +412,6 @@ src/main/resources/
 | `@Service` | Business logic component |
 | `@Repository` | Data access component |
 | `@Configuration` | Configuration class |
-| `@RequiredArgsConstructor` | Lombok: constructor injection |
 | `@Transactional` | Transaction management |
 | `@Valid` | Trigger validation |
 | `@ConfigurationProperties` | Bind properties to class |
@@ -446,8 +472,6 @@ class UserServiceImplTest {
 ### Integration Test
 ```java
 @SpringBootTest
-@AutoConfigureMockMvc
-@Testcontainers
 class UserIntegrationTest {
 
     @Container
@@ -478,5 +502,6 @@ class UserIntegrationTest {
 | Service | Business logic, transactions | `@Service`, `@Transactional` |
 | Repository | Data access | `@Repository`, extends `JpaRepository` |
 | DTO | Data transfer | Records with validation annotations |
+| Request/Response | API contract | Separate DTOs for requests and responses |
 | Config | Configuration | `@Configuration`, `@ConfigurationProperties` |
 | Exception | Error handling | `@RestControllerAdvice` |
