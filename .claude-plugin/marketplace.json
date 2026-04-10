@@ -17,6 +17,7 @@
             "source": "./java-engineering-skills",
             "description": "skill set enforcing senior Java engineering best practices, optimized for modern frameworks and architecture.",
             "version": "1.0.0",
+            "commands": "./.claude/commaonds",
             "author": {
                 "name": "MarlinL"
             },
