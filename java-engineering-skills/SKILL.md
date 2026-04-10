@@ -22,7 +22,7 @@ A comprehensive suite of advanced engineering skills designed to enforce Domain-
 
 ### Claude Code
 ```
-/read web-engineering/agent-designer/SKILL.md
+/read java-engineering-skills/agent-designer/SKILL.md
 ```
 
 
