@@ -2,7 +2,7 @@
     "name": "marlinl-claude-skills",
     "owner": {
         "name": "MarlinL",
-        "url": "https://github.com/marlinl"
+        "url": "https://github.com/marlinl/claude-skills"
     },
     "description": "A collection of skills for Claude, created by MarlinL.",
     "homepage": "https://github.com/marlinl/claude-skills",
@@ -13,20 +13,21 @@
     },
     "plugins": [
         {
-        "name": "web-engineering-skills",
-        "source": "./web-engineering-skills",
-        "description": "A skill that provides weather information for a given location.",
-        "version": "1.0.0",
-        "author": {
-            "name": "MarlinL"
-        },
-        "keywords": [
-            "java",
-            "spring",
-            "maven",
-            "test-quality"
-        ],
-        "category": "development"
+            "name": "java-engineering-skills",
+            "source": "./java-engineering-skills",
+            "description": "skill set enforcing senior Java engineering best practices, optimized for modern frameworks and architecture.",
+            "version": "1.0.0",
+            "author": {
+                "name": "MarlinL"
+            },
+            "keywords": [
+                "java",
+                "spring",
+                "maven",
+                "test-quality",
+                "clean-architecture"
+            ],
+            "category": "development"
         }
     ]
 }
